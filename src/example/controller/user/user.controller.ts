@@ -8,6 +8,7 @@ import {
   Get,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from '../../dto/user/user.dto';
 
 // PRISMA
 import { UserService } from '../../service/user/user.service';
@@ -19,9 +20,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('/create')
-  async signupUser(
-    @Body() userData: { name?: string; email: string },
-  ): Promise<UserModel> {
+  async signupUser(@Body() userData: CreateUserDto): Promise<UserModel> {
     return this.userService.createUser(userData);
   }
 }
